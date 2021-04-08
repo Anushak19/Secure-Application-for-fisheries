@@ -1,0 +1,38 @@
+import wixData from 'wix-data';
+import wixLocation from 'wix-location';
+import {fetch} from 'wix-fetch';
+$w.onReady(function () {     // Fetch the user's location details
+     fetch('https://extreme-ip-lookup.com/json', {
+        method: 'get'
+     })     // Check if the request was successful
+     .then((httpResponse) => {
+        if (httpResponse.ok) {
+           return httpResponse.json();
+        }
+     })     
+     .then((json) => {
+        // Set the user's countryCode as a const
+        const ipaddress = json.query;
+            if(ipaddress === "" && wixLocation.path !== "blocked"){
+           
+           wixLocation.to("https://www.razmarines.com/blocked");
+        }
+     });})
+
+$w.onReady(function () {     // Fetch the user's location details
+     fetch('https://extreme-ip-lookup.com/json', {
+        method: 'get'
+     })     // Check if the request was successful
+     .then((httpResponse) => {
+        if (httpResponse.ok) {
+           return httpResponse.json();
+        }
+     })     
+     .then((json) => {
+        // Set the user's countryCode as a const
+        const loc = json.countryCode;
+            if(loc === "JP" && wixLocation.path !== "not-available"){
+           
+           wixLocation.to("https://www.razmarines.com/not-available");
+        }
+     });})
