@@ -1,38 +1,38 @@
 import wixData from 'wix-data';
 import wixLocation from 'wix-location';
 import {fetch} from 'wix-fetch';
-$w.onReady(function () {     // Fetch the user's location details
+$w.onReady(function () {     // Function used to fetch ip
      fetch('https://extreme-ip-lookup.com/json', {
         method: 'get'
-     })     // Check if the request was successful
+     })     // Check the current customer ip
      .then((httpResponse) => {
         if (httpResponse.ok) {
            return httpResponse.json();
         }
      })     
      .then((json) => {
-        // Set the user's countryCode as a const
+        // Set user ip address to block
         const ipaddress = json.query;
             if(ipaddress === "" && wixLocation.path !== "blocked"){
            
-           wixLocation.to("https://www.razmarines.com/blocked");
+           wixLocation.to("https://www.razmarines.com/blocked");//custom block page
         }
      });})
 
-$w.onReady(function () {     // Fetch the user's location details
+$w.onReady(function () {     // Function to fetch user location
      fetch('https://extreme-ip-lookup.com/json', {
         method: 'get'
-     })     // Check if the request was successful
+     })     // Check the current customer location
      .then((httpResponse) => {
         if (httpResponse.ok) {
            return httpResponse.json();
         }
      })     
      .then((json) => {
-        // Set the user's countryCode as a const
+        // Set the user's countryCode to show as not available
         const loc = json.countryCode;
             if(loc === "JP" && wixLocation.path !== "not-available"){
            
-           wixLocation.to("https://www.razmarines.com/not-available");
+           wixLocation.to("https://www.razmarines.com/not-available");//custom not available page
         }
      });})
